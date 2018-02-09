@@ -4,9 +4,18 @@ body {
 }
 
 .characters {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: #4f413e;
     margin-top: 5%;
     padding: 20px;
+    border: 10px double #00000066;
+}
+
+img, progress {
+    box-shadow: 7px 7px rgba(0, 0, 0, 0.603);
+}
+
+img {
+    border: 5px solid black;
 }
 
 .fader {
@@ -15,7 +24,7 @@ body {
 
 #fightBtn {
     margin: auto;
-    background-color: rgba(175, 42, 42, 0.911);
+    background-color: rgba(15, 65, 88, 0.877);
     padding: 20px;
     color: white;
     font-weight: 600;
@@ -26,6 +35,17 @@ body {
     float: right;
 }
 
+#progressBar {
+    background-color: rgba(255, 255, 255, 0.747);
+    padding: 10px;
+    width:100%;
+}
+
+#heroHP, #enemyHP {
+    color: white;
+    margin-top: 10px;
+}
+
 #myHeroSpot {
     float: left;
 }
@@ -34,7 +54,13 @@ body {
     color: white;
 }
 
-.gameplay {
-    background-color: rgba(0, 0, 0, 0.63);
+.gameplay, .hp {
+    background-color: rgba(71, 109, 126, 0.774);
     padding: 20px;
+    margin-left: 10px solid white;
+    margin-right: 10px solid white;
+}
+
+.hp {
+    margin-top: 10px;
 }
