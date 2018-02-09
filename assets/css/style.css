@@ -1,0 +1,40 @@
+body {
+    background-image: url("../images/Olympus.jpg");
+    text-align: center;
+}
+
+.characters {
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-top: 5%;
+    padding: 20px;
+}
+
+.fader {
+    opacity: 0.3;
+}
+
+#fightBtn {
+    margin: auto;
+    background-color: rgba(175, 42, 42, 0.911);
+    padding: 20px;
+    color: white;
+    font-weight: 600;
+    
+}
+
+#myEnemySpot {
+    float: right;
+}
+
+#myHeroSpot {
+    float: left;
+}
+
+.gameplayHero, .gameplayEnemy {
+    color: white;
+}
+
+.gameplay {
+    background-color: rgba(0, 0, 0, 0.63);
+    padding: 20px;
+}
