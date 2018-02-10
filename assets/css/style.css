@@ -14,6 +14,17 @@ img, progress {
     box-shadow: 7px 7px rgba(0, 0, 0, 0.603);
 }
 
+progress {
+    height: 40px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgb(231, 245, 237);
+    padding: 10px;
+    
+}
+progress::-webkit-progress-value {
+    background: rgb(121, 189, 138);;
+  }
 img {
     border: 5px solid black;
 }
@@ -35,12 +46,6 @@ img {
     float: right;
 }
 
-#progressBar {
-    background-color: rgba(255, 255, 255, 0.747);
-    padding: 10px;
-    width:100%;
-}
-
 #heroHP, #enemyHP {
     color: white;
     margin-top: 10px;
@@ -57,10 +62,15 @@ img {
 .gameplay, .hp {
     background-color: rgba(71, 109, 126, 0.774);
     padding: 20px;
-    margin-left: 10px solid white;
-    margin-right: 10px solid white;
+    border-left: 10px double rgba(0, 0, 0, 0.753);
+    border-right: 10px double  rgba(0, 0, 0, 0.753);
+}
+
+.gameplay {
+    margin-top: 10px;
+    border-top: 10px double  rgba(0, 0, 0, 0.753);
 }
 
 .hp {
-    margin-top: 10px;
+    border-bottom: 10px double  rgba(0, 0, 0, 0.753);
 }
