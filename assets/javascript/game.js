@@ -5,38 +5,46 @@ $(document).ready(function(){
     //2. The player must then defeat all remaining fighters. 
     //-Enemies should be moved to a different area of the screen
     //create backstories on popup
-
+//.gameplay background switches
     //array of char objs
     var charArr = [
         {
-            name: "Zeus", 
+            name: "Chun Li", 
             hp : 100,
-            image : "assets/images/zeus.jpg"
+            image : "assets/images/Chun-Li_tatsunoko.png",
+            heroGif : "assets/images/chunli.gif"
+            // enemyGif : "assets/imags/chunlienemy.gif"
         }, 
         {
-            name: "Athena", 
+            name: "Pikachu", 
             hp : 100,
-            image : "assets/images/athena.jpg"   
+            image : "assets/images/pikachu.png", 
+            heroGif : "assets/images/pikachu.gif", 
+            enemyGif : "assets/images/pikachuenemy.gif"
         }, 
         {
-            name: "Siren", 
+            name: "Mega Man", 
             hp : 100,
-            image : "assets/images/siren.jpg"
+            image : "assets/images/megaman.png", 
+            heroGif : "assets/images/megamanherogif.gif"
         }, 
         {
-            name: "Neptune", 
+            name: "Kirby", 
             hp : 100,
-            image : "assets/images/neptune.jpg"            
+            image : "assets/images/kirby.png", 
+            heroGif : "assets/images/kirbyhero.gif", 
+            enemyGif : "assets/images/kirbywinning.gif"
         }, 
         {
-            name: "Hercules", 
-            hp : 100,
-            image : "assets/images/hercules.jpg"
+            name: "Saitama", 
+            hp : 150,
+            image : "assets/images/Saitama.png",
+            heroGif : "assets/images/saitamahero.gif"
         }, 
         {
-            name: "Medusa", 
+            name: "Mario", 
             hp : 100,
-            image : "assets/images/medusa.jpg"
+            image : "assets/images/mario.png"
         }, 
     ]
 
@@ -56,8 +64,28 @@ $(document).ready(function(){
     var myHealth
     
     var attackPower
+    
     var myEnemy = $("<div id = 'myEnemySpot' class = 'myEnemy'></div>")
+
     var myHero = $("<div id = 'myHeroSpot' class = 'myHero'></div>")
+    
+    var backArr = [
+        {
+            name : "bg1",
+            image : "../images/background/sakura.png" 
+            //sound : 
+        },
+        {
+            name : "bg2",
+            image : "../images/background/hondeStage.jpg"
+            // sound : 
+        },
+        {
+            name : "bg3", 
+            image : "../images/background/kenstage.png"
+            //sound : 
+        }
+    ]
 
     function initGame () {
         isHeroChosen = false
@@ -80,7 +108,7 @@ $(document).ready(function(){
             $(this).addClass("fader")
             // console.log(chosenHero)
             //get chosenHero to arena
-            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:300px; height:360px;'/>")
+            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:300px; height:300px;'/>")
             $(".gameplayHero").append(myHero)
             myHeroHealth = $("<div id = 'progressBar' class = 'myHeroHealth'></div>")
             myHeroHealth.html("<progress id='progress' value='"+chosenHero.hp+"' max='100'> </progress>")
@@ -99,26 +127,39 @@ $(document).ready(function(){
             myEnemyHealth = $("<div id = 'progressBar' class = 'myHealth'></div>")
             myEnemyHealth.html("<progress id='progress' value='"+chosenEnemy.hp+"' max='100'> </progress>")
             $("#enemyHP").append(myEnemyHealth)
-            
-        }
-        
+        }      
     })
-    
+
+    $("#newArena").on("click", function () {
+        var randBackground = Math.floor(Math.random()* backArr.length)
+        chosenBG = backArr[$(this).attr("value")]
+        console.log(randBackground)
+        console.log(chosenBG)
+           $(".gameplay").css("background-image", "url('"+ backArr[i].image +"')") 
+
+    })
+
     $("#fightBtn").on("click", function() {
         // console.log("fight!")
         // console.log(chosenHero)
         if (chosenEnemy.hp > 0) {
             heroAttack()
+            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.heroGif + "' style = 'width:300px; height:360px;'/>")
+            $(".gameplayHero").append(myHero)
             $(".heroAttacks").html("<h2>You attacked & caused " +attackPower+ " hp damage!</h2>")
+            //enter a 'setTimeout' for time lapse between first and second attack
             if (chosenHero.hp>0) {
                 enemyAttack()
                 $(".enemyAttacks").html("Enemy attacked, caused "+attackPower+" hp damage!</h2>")
                 myHeroHealth.html("<progress id='progress' value='"+(chosenHero.hp - attackPower)+"' max='100'> </progress>")
+                myEnemy.html("<h2 id='enemyName' >ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.enemyGif + "' style = 'width:300px; height:360px;'/>")
+                $(".gameplayEnemy").append(myEnemy)
                 $("#heroHP").push(myHeroHealth)       
             }
             else if (chosenHero.hp <= 0) {
                 alert("YOU LOST! PLAY AGAIN!")
-
+                myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:300px; height:360px;'/>")
+                $(".gameplayHero").append(myHero)
             }
             // console.log("hello")
             // heroAttack()
@@ -131,6 +172,8 @@ $(document).ready(function(){
             $("#enemyHP").html(' ')
             myEnemy.html('<h2>PICK A NEW OPPONENT!</h2>')
             myHeroHealth.html("<progress id='progress' value='"+(chosenHero.hp + 20)+"' max='100'> </progress>")
+            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:300px; height:360px;'/>")
+            $(".gameplayHero").append(myHero)
 
             newEnemy()
             //remove enemy from arena
@@ -189,10 +232,8 @@ $(document).ready(function(){
             }
         })
         }
-        // if ( chosenEnemy.hp > 0 ) {
-        //     //when you press the button attack
-        //     //subract random hp on attack
-        // }
+
+        //create function for movement
     })
     
     initGame()

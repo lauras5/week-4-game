@@ -1,17 +1,14 @@
 body {
-    background-image: url("../images/Olympus.jpg");
+    background-color: grey;
+    /* background-image: url("../images/Olympus.jpg"); */
     text-align: center;
 }
 
 .characters {
-    background-color: #4f413e;
+    background-color: #ffffffa8;
     margin-top: 5%;
     padding: 20px;
-    border: 10px double #00000066;
-}
-
-img, progress {
-    box-shadow: 7px 7px rgba(0, 0, 0, 0.603);
+    border: 10px double #fdfdfde3;
 }
 
 progress {
@@ -25,9 +22,6 @@ progress {
 progress::-webkit-progress-value {
     background: rgb(121, 189, 138);;
   }
-img {
-    border: 5px solid black;
-}
 
 .fader {
     opacity: 0.3;
@@ -38,8 +32,7 @@ img {
     background-color: rgba(15, 65, 88, 0.877);
     padding: 20px;
     color: white;
-    font-weight: 600;
-    
+    font-weight: 600; 
 }
 
 #myEnemySpot {
@@ -60,17 +53,19 @@ img {
 }
 
 .gameplay, .hp {
-    background-color: rgba(71, 109, 126, 0.774);
+    
     padding: 20px;
-    border-left: 10px double rgba(0, 0, 0, 0.753);
-    border-right: 10px double  rgba(0, 0, 0, 0.753);
+    border-left: 10px double rgba(255, 255, 255, 0.753);
+    border-right: 10px double  rgba(255, 255, 255, 0.753);
 }
 
 .gameplay {
     margin-top: 10px;
-    border-top: 10px double  rgba(0, 0, 0, 0.753);
+    border-top: 10px double  rgba(255, 255, 255, 0.753);
+    
 }
 
 .hp {
-    border-bottom: 10px double  rgba(0, 0, 0, 0.753);
+    border-bottom: 10px double  rgba(255, 255, 255, 0.753);
+    background-color: rgba(71, 109, 126, 0.774);
 }
