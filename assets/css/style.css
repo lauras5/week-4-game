@@ -1,7 +1,16 @@
 body {
-    background-color: grey;
+    background-color: rgb(212, 211, 211);
     /* background-image: url("../images/Olympus.jpg"); */
     text-align: center;
+}
+
+h1 {
+    
+}
+.container-fluid {
+    display: block;
+    margin: auto;
+    width: 90%;
 }
 
 .characters {
@@ -27,6 +36,10 @@ progress::-webkit-progress-value {
     opacity: 0.3;
 }
 
+.visible {
+    opacity: 1;
+}
+
 #fightBtn {
     margin: auto;
     background-color: rgba(15, 65, 88, 0.877);
@@ -48,6 +61,15 @@ progress::-webkit-progress-value {
     float: left;
 }
 
+.enemy {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
 .gameplayHero, .gameplayEnemy {
     color: white;
 }
@@ -62,10 +84,12 @@ progress::-webkit-progress-value {
 .gameplay {
     margin-top: 10px;
     border-top: 10px double  rgba(255, 255, 255, 0.753);
+    background-size: cover;
+    background-repeat: no-repeat;
     
 }
 
 .hp {
     border-bottom: 10px double  rgba(255, 255, 255, 0.753);
-    background-color: rgba(71, 109, 126, 0.774);
+    background-color: rgba(212, 212, 212, 0.774);
 }
