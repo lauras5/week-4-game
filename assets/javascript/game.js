@@ -8,8 +8,8 @@ $(document).ready(function(){
             image : "assets/images/chunli.png",
             heroGif : "assets/images/chunli.gif",
             enemyGif : "assets/imags/chunli.gif",
-            background : "assets/images/background/japan.gif",        
-            //sound : 
+            background : "assets/images/background/japan.gif", 
+            music : "assets/sounds/chunli-theme.mp3"       
         }, 
         {
             name: "Mega Man", 
@@ -98,23 +98,26 @@ $(document).ready(function(){
             // console.log(chosenHero)
             //get chosenHero to arena
             //player will choose a character by clicking on the fighter's picture
-            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:280px; height:300px;'/>")
+            myHero.html("<h2 id='heroName' >HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:280px; height:300px;'/>")
             $(".gameplayHero").append(myHero)
             myHeroHealth = $("<div id = 'progressBar' class = 'myHeroHealth'></div>")
-            myHeroHealth.html("<progress id='progress' value='"+chosenHero.hp+"' max='100'> </progress>")
+            myHeroHealth.html("<progress id='progress' value='"+ chosenHero.hp +"' max='100'> </progress>")
             $("#heroHP").append(myHeroHealth)
             //.gameplay background switches
-            $(".gameplay").css("background-image", "url('"+ chosenHero.background +"')") 
-            // console.log(chosenHero.hp)
+            $(".gameplay").css("background-image", "url('"+ chosenHero.background +"')")
+            function play(){
+                var audio = $(".music").html("<audio src='" + chosenHero.music + "' type='audio/mp3'></audio>") 
+                          }
+            console.log(chosenHero.hp)
+            audio.play()
         }
-        
         else if (!isEnemyChosen) {
             chosenEnemy = charArr[$(this).attr("value")]
             isEnemyChosen = true
             $(this).addClass("fader")
             // console.log(chosenEnemy)
             //get chosenEnemy to arena
-            myEnemy.html("<h2 id='enemyName' >ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:300px; height:360px;'/>")
+            myEnemy.html("<h2 id='enemyName'>ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:300px; height:360px;'/>")
             $(".gameplayEnemy").append(myEnemy)
             myEnemyHealth = $("<div id = 'progressBar' class = 'myHealth'></div>")
             myEnemyHealth.html("<progress id='progress' value='"+chosenEnemy.hp+"' max='100'> </progress>")
@@ -132,17 +135,8 @@ $(document).ready(function(){
             heroAttack()
             //delay counter attack
             setTimeout (function(){
-                enemyAttack()
-                $(".allAttacks").html("<h2>Enemy attacked, caused "+attackPower+" hp damage!</h2>")
-                myHeroHealth.html("<progress id='progress' value='"+(chosenHero.hp - attackPower)+"' max='100'> </progress>")
-                myEnemy.html("<h2 id='enemyName' >ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.enemyGif + "' style = 'width:450px; height:450px;'/>")
-                $(".gameplayEnemy").append(myEnemy)
-                $("#heroHP").push(myHeroHealth)   
-                if (chosenEnemy.h <= 0) {
-
-                    }    
-                
-            }, 1000)
+                enemyAttack() 
+            }, 2000)
             //activate the gif with the on click event
             
             if (chosenHero.hp <= 0) {
@@ -155,15 +149,6 @@ $(document).ready(function(){
                 $("#heroHP").empty()
                 $(".gameplayEnemy").empty()
                 $(".gameplayHero").empty()
-                $(this).removeClass("fader")
-                
-                var num = Math.floor(12 / charArr.length)
-                for ( var i = 0; i <charArr.length; i++) {
-                    //concat the var 
-                    charThing.html("<img src='" + charArr[i].image + "' style = 'width:140px; height:180px;'/><h3>"+charArr[i].name+"</h3>")
-                    $(".characters").html(charThing)
-                }
-                
             }
             // console.log("hello")
             // heroAttack()
@@ -176,7 +161,8 @@ $(document).ready(function(){
             isEnemyChosen = false
             $("#enemyHP").empty()
             myEnemy.html('<h2>PICK A NEW OPPONENT!</h2>')
-            myHeroHealth.html("<progress id='progress' value='"+(chosenHero.hp + 50)+"' max='100'> </progress>")
+            chosenHero.hp = chosenHero.hp + 30
+            myHeroHealth.push("<progress id='progress' value='"+chosenHero.hp +"' max='100'> </progress>")
             myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.image + "' style = 'width:300px; height:360px;'/>")
             $(".gameplayHero").append(myHero)
             newEnemy()
@@ -188,32 +174,42 @@ $(document).ready(function(){
         return
         
         function heroAttack () {
-            //picks random number to attack
+            //generate random attack power
             attackPower = Math.floor(Math.random()* 40)
             //subtacts the random number from the enemy hp
-            myEnemyHealth.html("<progress id='progress' value='"+(chosenEnemy.hp - attackPower)+"' max='100'> </progress>")
+            chosenEnemy.hp = (chosenEnemy.hp - attackPower)            
+            myEnemyHealth.html("<progress id='progress' value='"+ chosenEnemy.hp +"' max='100'> </progress>")
             $("#enemyHP").push(myEnemyHealth)
-            //push new hp
-            chosenEnemy.hp = (chosenEnemy.hp - attackPower)
-            // console.log("enemy hp " + chosenEnemy.hp)
-            
-
-            myHero.html("<h2 id='heroName' >HERO : " +chosenHero.name+"</h2><img src='" + chosenHero.heroGif + "' style = 'width:450px; height:400px;'/>")
+            //display attack and damage
+            $(".allAttacks").html("<h2>You attacked & caused " + attackPower + " hp damage!</h2>")
+            //shows gif as soon as button is pressed
+            myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.heroGif + "' style = 'width:450px; height:400px;'/>")
             $(".gameplayHero").append(myHero)
-            $(".allAttacks").html("<h2>You attacked & caused " +attackPower+ " hp damage!</h2>")
+            //after 2 seconds, goes back to image
+            setTimeout (function() {
+                myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:450px; height:400px;'/>")
+                $(".gameplayHero").append(myHero)
+            },2000)
           
         }
         
         function enemyAttack () {
-            attackPower = Math.floor(Math.random()* 15)
-            // var totalAttack = attackPower[]
-            //subtract random hp from Enemy
-            myHeroHealth.html("<progress id='progress' value='"+(chosenHero.hp - attackPower)+"' max='100'> </progress>")
+            //generate random attack power
+            attackPower = Math.floor(Math.random()* 25)
+            chosenHero.hp = (chosenHero.hp - attackPower)
+            myHeroHealth.html("<progress id='progress' value='"+ chosenHero.hp +"' max='100'> " + chosenHero.hp + "</progress>")
             $("#heroHP").push(myHeroHealth)
-            chosenHero.hp = (chosenHero.hp - attackPower)        
+            //display attack and damage
+            $(".allAttacks").html("<h2>Enemy attacked, caused "+attackPower+" hp damage!</h2>")
+            //show gif on attack
+            myEnemy.html("<h2 id='enemyName'> ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.enemyGif + "' style = 'width:450px; height:450px;'/>")
+            $(".gameplayEnemy").append(myEnemy)
+            //after 2.5 seconds go back to image
+            setTimeout (function() {
+                myEnemy.html("<h2 id='heroName'> HERO : " + chosenEnemy.name +"</h2><img src='" + chosenEnemy.image + "' style = 'width:450px; height:400px;'/>")
+                $(".gameplayEnemy").append(myEnemy)
+                },2500)        
             // console.log(attackPower)
-            //if enemy is still alive, they attack
-            //enemy attacks yuy back
         }
         
         function newEnemy () {
@@ -226,10 +222,13 @@ $(document).ready(function(){
                     $(this).addClass("fader")
                     // console.log(chosenEnemy)
                     //get chosenEnemy to arena
-                    myEnemy.html("<h2 id='enemyName' >ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:300px; height:360px;'/>")
+                    myEnemy.html("<h2 id='enemyName'> ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:300px; height:360px;'/>")
                     $(".gameplayEnemy").html(myEnemy)
                     myEnemyHealth.html("<progress id='progress' value='"+chosenEnemy.hp+"' max='100'> </progress>")
                     $("#enemyHP").append(myEnemyHealth)
+                    if(chosenEnemy.hp <= 0) {
+                        alert("This player was already beaten, choose another player!")
+                    }
                 }
             }
           })

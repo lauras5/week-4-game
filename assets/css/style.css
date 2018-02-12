@@ -85,11 +85,13 @@ progress::-webkit-progress-value {
     margin-top: 10px;
     border-top: 10px double  rgba(255, 255, 255, 0.753);
     background-size: cover;
+    height: 560px;
     background-repeat: no-repeat;
+    background-color: rgba(142, 183, 238, 0.555);
     
 }
 
 .hp {
     border-bottom: 10px double  rgba(255, 255, 255, 0.753);
-    background-color: rgba(212, 212, 212, 0.774);
+    background-color: rgba(109, 168, 168, 0.829);
 }
