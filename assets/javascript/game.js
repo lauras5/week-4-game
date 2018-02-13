@@ -77,6 +77,7 @@ $(document).ready(function(){
     //enemy & hero image/gif holder
     var myEnemy = $("<div id = 'myEnemySpot' class = 'myEnemy'></div>")
     var myHero = $("<div id = 'myHeroSpot' class = 'myHero'></div>")
+    var wins = 0
 
     $('.characters').show(1000);
     //initiate game function
@@ -102,7 +103,7 @@ $(document).ready(function(){
             // console.log(chosenHero)
             //get chosenHero to arena
             //player will choose a character by clicking on the fighter's picture
-            myHero.html("<h2 id='heroName' >HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:390px; height:475px;'/>")
+            myHero.html("<h2 id='heroName' >HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:290px; height:375px;'/>")
             $(".gameplayHero").append(myHero)
             myHeroHealth = $("<div id = 'progressBar' class = 'myHeroHealth'></div>")
             myHeroHealth.html("<progress id='progress' value='"+ chosenHero.hp +"' max='100'> </progress>")
@@ -119,7 +120,7 @@ $(document).ready(function(){
             $(this).addClass("fader")
             // console.log(chosenEnemy)
             //get chosenEnemy to arena
-            myEnemy.html("<h2 id='enemyName'>ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:390px; height:475px;'/>")
+            myEnemy.html("<h2 id='enemyName'>ENEMY : " +chosenEnemy.name+ "</h2><img src='" + chosenEnemy.image + "' style = 'width:290px; height:375px;'/>")
             $(".gameplayEnemy").append(myEnemy)
             myEnemyHealth = $("<div id = 'progressBar' class = 'myHealth'></div>")
             myEnemyHealth.html("<progress id='progress' value='"+chosenEnemy.hp+"' max='100'> </progress>")
@@ -139,11 +140,13 @@ $(document).ready(function(){
             alert("YOU WIN!")
             chosenHero.hp = chosenHero.hp + 25
             myHeroHealth.html("<progress id='progress' value='"+ chosenHero.hp  +"' max='100'> </progress>")
-            myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:450px; height:400px;'/>")
+            myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:290px; height:375px;'/>")
             $(".gameplayHero").append(myHero)
             $("#fightBtn").hide('2000')
+            wins++
             //call function newEnemy
             newEnemy()
+            
             // console.log("hello")    
         }
         
@@ -153,7 +156,7 @@ $(document).ready(function(){
                 alert("YOU WIN!")
                 chosenHero.hp = chosenHero.hp + 15
                 myHeroHealth.html("<progress id='progress' value='"+ chosenHero.hp  +"' max='100'> </progress>")
-                myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:450px; height:400px;'/>")
+                myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:290px; height:375px;'/>")
                 $(".gameplayHero").append(myHero)
                 $("#fightBtn").hide('2000')
                 //call function newEnemy
@@ -163,27 +166,19 @@ $(document).ready(function(){
 
             if (chosenHero.hp <= 0) {
                 alert("YOU LOSE! CHOOSE A NEW PLAYER AND TRY AGAIN!")
-                $('.characters').show('2000');
-                $("#enemyHP").empty()
-                $("#heroHP").empty()
-                $(".gameplayEnemy").empty()
-                $(".gameplayHero").empty()
-                isHeroChosen = false
-                isEnemyChosen = false
-                //dynamically change bootstrap with for loop to evenly produce characters, only works with 12 or less characters, will round down columns
-                var num = Math.floor(12 / charArr.length)
-                for ( var i = 0; i <charArr.length; i++) {
-                    //concat the var 
-                    charThing.html("<img src='" + charArr[i].image + "' style = 'width:140px; height:180px;'/><h3>"+charArr[i].name+"</h3>")
-                    $(".characters").append(charThing)
-                    $(".char").removeClass("fader")
-                }
+                reset()
             }
+
             setTimeout (function(){
                 enemyAttack() 
             }, 1000)
         }
-        
+
+        if (wins >= 5) {
+            alert ("WINNER! YOU MADE IT TO THE TOP! PLAY AGAIN!")
+            initGame()
+        }
+
         return
         
         function heroAttack () {
@@ -196,7 +191,7 @@ $(document).ready(function(){
             //display attack and damage
             $(".allAttacks").html("<h2>You attacked & caused " + attackPower + " hp damage!</h2>")
             //shows gif as soon as button is pressed
-            myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.heroGif + "' style = 'width:450px; height:400px;'/>")
+            myHero.html("<h2 id='heroName'> HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.heroGif + "' style = 'width:450px; height:450px;'/>")
             $(".gameplayHero").append(myHero)  
         }
         
@@ -224,6 +219,25 @@ $(document).ready(function(){
             
         }
 
+        function reset() {
+            $('.characters').show('2000');
+                $("#enemyHP").empty()
+                $("#heroHP").empty()
+                myEnemy.html('')
+                myHero.html('')
+                $(".char").removeClass("fader")
+                charArr[i].hp = 100
+                // charArr.removeClass("fader")
+                //dynamically change bootstrap with for loop to evenly produce characters, only works with 12 or less characters, will round down columns
+                isHeroChosen = false
+                isEnemyChosen = false
+                var num = Math.floor(12 / charArr.length)
+                for ( var i = 0; i <charArr.length; i++) {
+                    //concat the var 
+                    charThing.html("<img src='" + charArr[i].image + "' style = 'width:120px; height:180px;'/><h3>"+charArr[i].name+"</h3>")
+                    $(".characters").append(charThing)
+                }
+        }
     })
     
     initGame()
