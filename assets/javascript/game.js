@@ -219,7 +219,6 @@ $(document).ready(function(){
             $('.characters').show(2000);
             isEnemyAlive = false
             isEnemyChosen = false
-
         }
 
         function reset() {
