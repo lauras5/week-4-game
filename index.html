@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Ubuntu+Mono" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -10,7 +11,8 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1>Attack On Toons!</h1>
+        <h1>Road to the Top</h1>
+        <h2 class="road">How far can you go? Choose your players!</h2>
         <div class="row characters">
 
         </div>
@@ -20,22 +22,22 @@
             <div class="col-md-2 gameplayHero"></div>
             <div class="col-md-8"></div>
             <div class="col-md-2 gameplayEnemy"></div>
-            <div class="music"></div>
             
         </div>
         
         <div class="row hp">
             
-            <div class="col-md-2" id="heroHP">HERO HP :</div>
-            <div class="col-md-8 playByPlay">
+            <div class="col-md-4" id="heroHP">HERO HP :</div>
+            <div class="col-md-4 playByPlay">
                 <div class="allAttacks"></div>
             </div>
-            <div class="col-md-2" id="enemyHP">ENEMY HP :</div>
+            <div class="col-md-4" id="enemyHP">ENEMY HP :</div>
             
         </div>
-
+        
         <div class="row">.
             <button id="fightBtn">ATTACK!</button>    
+            <div class="music"></div>
         </div>
 
     </div>

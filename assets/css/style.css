@@ -1,11 +1,14 @@
 body {
     background-color: rgb(212, 211, 211);
-    /* background-image: url("../images/Olympus.jpg"); */
     text-align: center;
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 h1 {
-    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 60px;
+    margin: 20px;
+
 }
 .container-fluid {
     display: block;
@@ -68,6 +71,10 @@ progress::-webkit-progress-value {
     transform: scaleX(-1);
     filter: FlipH;
     -ms-filter: "FlipH";
+}
+
+.music {
+    display: none;
 }
 
 .gameplayHero, .gameplayEnemy {
