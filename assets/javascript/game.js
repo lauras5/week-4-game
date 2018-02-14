@@ -140,7 +140,7 @@ $(document).ready(function(){
         $("#fightBtn").hide('fast')
         setTimeout(function(){
             $("#fightBtn").show('fast')
-        }, 2000)
+        }, 1000)
         //if enemy is alive, attack
         heroAttack()
 
