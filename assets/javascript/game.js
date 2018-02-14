@@ -98,14 +98,19 @@ $(document).ready(function(){
     //get value of item you are clicking onss
     $(document).on("click", ".char", function(){
         $(".gameplay").show('1000')
+        if ($(".char").hasClass("fader") = true) {
+            console.log("true")
+        }
+            //need function to disable button after click
         if(!isHeroChosen) {
+            //player will choose a character by clicking on the fighter's picture
             chosenHero = charArr[$(this).attr("value")]
+            // console.log(chosenHero)
             isHeroChosen = true
             $(this).addClass("fader")
+            $(this).addClass("disabled")
             chosenHero.hp = 100
-            // console.log(chosenHero)
             //get chosenHero to arena
-            //player will choose a character by clicking on the fighter's picture
             myHero.html("<h2 id='heroName' >HERO : " + chosenHero.name +"</h2><img src='" + chosenHero.image + "' style = 'width:290px; height:375px;'/>")
             $(".gameplayHero").append(myHero)
             myHeroHealth = $("<div id = 'progressBar' class = 'myHeroHealth'></div>")
@@ -121,13 +126,14 @@ $(document).ready(function(){
             chosenEnemy = charArr[$(this).attr("value")]
             isEnemyChosen = true
             $(this).addClass("fader")
+            $(this).addClass("disabled")
             chosenEnemy.hp = 100
             // console.log(chosenEnemy)
             //get chosenEnemy to arena
             myEnemy.html("<h2 id='enemyName'>ENEMY : " + chosenEnemy.name + "</h2><img src='" + chosenEnemy.image + "' style = 'width:290px; height:375px;'/>")
             $(".gameplayEnemy").append(myEnemy)
             myEnemyHealth = $("<div id = 'progressBar' class = 'myHealth'></div>")
-            myEnemyHealth.html("<p>Hero HP : " + chosenEnemy.hp + "</p><progress id='progress' value='" + chosenEnemy.hp + "' max='100'> </progress>")
+            myEnemyHealth.html("<p>Enemy HP : " + chosenEnemy.hp + "</p><progress id='progress' value='" + chosenEnemy.hp + "' max='100'> </progress>")
             $("#enemyHP").html(myEnemyHealth)
             $('.characters').hide('2000');
             $('.road').hide('2000')
@@ -161,7 +167,10 @@ $(document).ready(function(){
             // console.log("hello")    
         }
         
-        if (chosenEnemy.hp > 0) {
+        if (chosenEnemy.hp > 0 && chosenHero.hp > 0) {
+            setTimeout (function(){
+                enemyAttack() 
+            }, 1000)
             //delay enemy attack
             if (chosenEnemy.hp <= 0) {
                 alert("YOU WIN!")
@@ -178,18 +187,17 @@ $(document).ready(function(){
             if (chosenHero.hp <= 0) {
                 alert("YOU LOSE! CHOOSE A NEW PLAYER AND TRY AGAIN!")
                 reset()
-                
+                wins = 0
             }
 
-            setTimeout (function(){
-                enemyAttack() 
-            }, 1000)
         }
         
         if (wins >= 5) {
             alert ("WINNER! YOU MADE IT TO THE TOP! PLAY AGAIN!")
             reset()
             wins = 0
+            $('.road').hide('2000')
+
         }
         
         return
@@ -238,11 +246,6 @@ $(document).ready(function(){
                 myEnemy.html('')
                 myHero.html('')
                 $(".char").removeClass("fader")
-                for ( i = 0; i < charArr; i++) {
-                    charArr[i].hp = 100
-                }
-                //dynamically change bootstrap with for loop to evenly produce characters, only works with 12 or less characters, will round down columns
-                
             }
         })
     

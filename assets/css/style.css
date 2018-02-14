@@ -37,6 +37,10 @@ h1 {
     border: 10px double #1e61b8e3;
 }
 
+.disabled {
+    cursor: not-allowed;
+}
+
 progress {
     height: 50px;
     width: 100%;
