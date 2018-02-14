@@ -1,6 +1,18 @@
+html {
+    zoom: 0.9;
+    -moz-transform: scale(0.9);
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+}
+
 body {
     background-color: rgb(212, 211, 211);
-    background-image: url("../images/background/backgroundimg.jpg");
+    background-image: url("../images/background/backgroundimg.png");
+    background-attachment: fixed;
+    top: 0;
+    left: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
     text-align: center;
     font-family: 'Ubuntu Mono', monospace;
     color: rgb(58, 58, 58);
