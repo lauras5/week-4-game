@@ -98,9 +98,7 @@ $(document).ready(function(){
     //get value of item you are clicking onss
     $(document).on("click", ".char", function(){
         $(".gameplay").show('1000')
-        if ($(".char").hasClass("fader") = true) {
-            console.log("true")
-        }
+
             //need function to disable button after click
         if(!isHeroChosen) {
             //player will choose a character by clicking on the fighter's picture
