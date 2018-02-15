@@ -146,7 +146,11 @@ $(document).ready(function(){
             $("#fightBtn").show('fast')
         }, 1000)
         //if enemy is alive, attack
-        heroAttack()
+        if (chosenHero.hp <= 0) {
+            alert("YOU LOSE! CHOOSE A NEW PLAYER AND TRY AGAIN!")
+            reset()
+            wins = 0
+        }
 
         if (chosenEnemy.hp <= 0) {
             alert("YOU WIN!")
@@ -161,11 +165,11 @@ $(document).ready(function(){
             wins++
             //call function newEnemy
             newEnemy()
-            
             // console.log("hello")    
         }
         
         if (chosenEnemy.hp > 0 && chosenHero.hp > 0) {
+            heroAttack()
             setTimeout (function(){
                 enemyAttack() 
             }, 1000)
@@ -244,6 +248,8 @@ $(document).ready(function(){
                 myEnemy.html('')
                 myHero.html('')
                 $(".char").removeClass("fader")
+                $(".char").removeClass("disabled")
+                $('.road').show('2000')
             }
         })
     
